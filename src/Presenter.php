@@ -22,13 +22,17 @@ abstract class Presenter
     }
 
     /**
-     * Magic getter to access properties that have been set in this entity
+     * Magic getter to call presenter methods or
+     * access properties that have been set in the entity
      *
      * @param string $property Name of the property to access
      * @return mixed
      */
     public function __get($property)
     {
+        if (method_exists($this, $property)) {
+            return $this->{$property}();
+        }
         return $this->_entity->get($property);
     }
 
