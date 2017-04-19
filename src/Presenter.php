@@ -14,9 +14,9 @@ abstract class Presenter
     /**
      * Constructor
      *
-     * @param \Cake\DataSource\EntityInterface $entity
+     * @param \Cake\DataSource\EntityInterface $entity The presented entity
      */
-    public function  __construct($entity)
+    public function __construct($entity)
     {
         $this->_entity = $entity;
     }
@@ -33,14 +33,15 @@ abstract class Presenter
         if (method_exists($this, $property)) {
             return $this->{$property}();
         }
+
         return $this->_entity->get($property);
     }
 
     /**
      * Overload entity functions
      *
-     * @param string $name
-     * @param string $args
+     * @param string $method the method to call
+     * @param array $arguments list of arguments for the method to call
      * @return mixed
      */
     public function __call($name, $args)
