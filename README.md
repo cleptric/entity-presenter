@@ -1,0 +1,1 @@
+# EntityPresenter plugin for CakePHP

@@ -1,0 +1,16 @@
+{
+    "name": "cleptric/entity-presenter",
+    "description": "Entity Presenter plugin for CakePHP",
+    "type": "cakephp-plugin",
+    "require": {
+        "cakephp/cakephp": ">=3.3.2 <4.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "EntityPresenter\\": "src"
+        }
+    }
+}
