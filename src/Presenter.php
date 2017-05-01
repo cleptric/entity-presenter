@@ -1,8 +1,13 @@
 <?php
 namespace EntityPresenter;
 
+use Cake\DataSource\EntityInterface;
+use EntityPresenter\PresenterTrait;
+
 abstract class Presenter
 {
+
+    use PresenterTrait;
 
     /**
      * Holds the instance of the entity
@@ -23,7 +28,9 @@ abstract class Presenter
 
     /**
      * Magic getter to call presenter methods or
-     * access properties that have been set in the entity
+     * access properties that have been set in the entity.
+     *
+     * If the accessed property is an entity, it's tried to present it as well.
      *
      * @param string $property Name of the property to access
      * @return mixed
@@ -33,19 +40,26 @@ abstract class Presenter
         if (method_exists($this, $property)) {
             return $this->{$property}();
         }
+        $value = $this->_entity->get($property);
 
-        return $this->_entity->get($property);
-    }
+        if (is_array($value)) {
+            foreach ($value as &$element) {
+                if ($element instanceof EntityInterface) {
+                    try {
+                        $element = $this->present($element);
+                    } catch (MissingPresenterException $e) {
+                        // fail silently
+                    }
+                }
+            }
+        } else if ($value instanceof EntityInterface) {
+            try {
+                $value = $this->present($value);
+            } catch (MissingPresenterException $e) {
+                // fail silently
+            }
+        }
 
-    /**
-     * Overload entity functions
-     *
-     * @param string $method the method to call
-     * @param array $arguments list of arguments for the method to call
-     * @return mixed
-     */
-    public function __call($name, $args)
-    {
-        return call_user_func_array([$this->_entity, $name], $args);
+        return $value;
     }
 }
