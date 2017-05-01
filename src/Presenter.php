@@ -37,9 +37,6 @@ abstract class Presenter
      */
     public function __get($property)
     {
-        if (method_exists($this, $property)) {
-            return $this->{$property}();
-        }
         $value = $this->_entity->get($property);
 
         if (is_array($value)) {
