@@ -7,7 +7,7 @@ use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Entity;
 use Cake\TestSuite\TestCase;
-use EntityPresenter\Presentertrait;
+use EntityPresenter\PresenterTrait;
 use TestApp\Model\Entity\Article;
 use TestApp\Model\Entity\User;
 
@@ -17,7 +17,7 @@ use TestApp\Model\Entity\User;
 class PresenterViewTest extends TestCase
 {
 
-    use Presentertrait;
+    use PresenterTrait;
 
     public function setUp()
     {
