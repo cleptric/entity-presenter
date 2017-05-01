@@ -15,5 +15,11 @@
         "psr-4": {
             "EntityPresenter\\": "src"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EntityPresenter\\Test\\": "tests",
+            "TestApp\\": "tests/test_app/TestApp"
+        }
     }
 }

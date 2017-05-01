@@ -38,7 +38,7 @@ class PresenterView extends View
     protected function _setupListener()
     {
         EventManager::instance()->on(
-            'View.beforeRender',
+            'View.beforeLayout',
             function () {
                 $this->_instantiatePresenters();
             }
