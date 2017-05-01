@@ -27,8 +27,7 @@ abstract class Presenter
     }
 
     /**
-     * Magic getter to call presenter methods or
-     * access properties that have been set in the entity.
+     * Magic getter to access properties that have been set in the entity.
      *
      * If the accessed property is an entity, it's tried to present it as well.
      *
