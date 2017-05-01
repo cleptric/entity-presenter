@@ -59,6 +59,7 @@ class PresenterView extends View
 
         if ($present !== false) {
             $toBePresented = $this->_dataToPresent($present);
+
             foreach ($toBePresented as $name => $presentable) {
                 if ($presentable instanceof EntityInterface) {
                     $this->viewVars[$name] = $this->present($this->viewVars[$name]);
@@ -72,7 +73,7 @@ class PresenterView extends View
      *
      * @param array|string|bool $present The name(s) of the view variable(s) that
      *   need(s) to be presented. If true all available view variables will be used.
-     * @return mixed The data to present.
+     * @return array The data to present.
      */
     protected function _dataToPresent($present = true)
     {
@@ -103,6 +104,6 @@ class PresenterView extends View
             return !empty($data) ? $data : null;
         }
 
-        return isset($this->viewVars[$present]) ? $this->viewVars[$present] : null;
+        return isset($this->viewVars[$present]) ? [$present => $this->viewVars[$present]] : null;
     }
 }
