@@ -52,7 +52,7 @@ abstract class Presenter
                     }
                 }
             }
-        } else if ($value instanceof EntityInterface) {
+        } elseif ($value instanceof EntityInterface) {
             try {
                 $value = $this->present($value);
             } catch (MissingPresenterException $e) {
