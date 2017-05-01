@@ -4,6 +4,7 @@ namespace EntityPresenter;
 use Cake\Core\App;
 use Cake\DataSource\EntityInterface;
 use Cake\Utility\Inflector;
+use EntityPresenter\MissingPresenterException;
 
 trait PresenterTrait
 {
@@ -21,7 +22,11 @@ trait PresenterTrait
         } else {
             $presenterName = $presenter;
         }
-        $presenter = App::className($presenterName, 'View\Presenter', 'Presenter');
+        $presenter = App::className($presenterName, 'View\Presenter');
+
+        if ($presenter === false) {
+            throw new MissingPresenterException(['presenter' => $presenterName]);
+        }
 
         return new $presenter($entity);
     }
